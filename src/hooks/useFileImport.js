@@ -40,7 +40,12 @@ export default function useFileImport(gpSystemSelected){
          return;
       }
       else {
-         handler(files)
+         handler(files).then(masterReport => {
+            console.log('✅ Master Report:', masterReport);
+            // now use it to update state, display data, etc.
+          }).catch(err => {
+            console.error('❌ Failed to parse:', err)
+          });
       }
 
    }
