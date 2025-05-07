@@ -1,5 +1,3 @@
-import { parse } from "postcss";
-
 const parseSystmOne = (files)=>{
    const filesArray = Array.from(files) //Converted FileList to an array
    const masterReport = {};
@@ -18,7 +16,7 @@ const parseSystmOne = (files)=>{
             reader.onload = () => {
                const lines = reader.result.split('\n')
                const headerArray = lines[0].split(',');
-               count++;
+               
 
                
                if (headerArray[0] === "Full Name" && headerArray[1] === 'Age'){
@@ -109,7 +107,6 @@ const parseSystmOne = (files)=>{
                      }
                      else{
                         masterReport[nhs_number_check] = object;
-                        
                      }
                   } 
                }

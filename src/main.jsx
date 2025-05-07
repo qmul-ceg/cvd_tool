@@ -9,11 +9,7 @@ const router = createBrowserRouter([{
    path: '/',
    element: <ImportScreen />,
 }
-//Add another path
-// {
-//    path: '/data',
-//    element: <DataScreen />
-// }
+
 
 
 ])
