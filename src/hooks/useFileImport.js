@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import GpSystems from "../enums/GpSystems";
-import parseSystmOne from "../lib/parsers/parseSystmOne";
+import parseSystmOneReport from "../lib/parsers/parseSystmOneReport";
 
 
 //Custom hook that allows us to input a file or folder
@@ -10,7 +10,7 @@ export default function useFileImport(gpSystemSelected){
    const [importError, setImportError] = useState('');
    const handlers = {
       // [GpSystems.EMIS_Web] : handleEMISWebReport,
-      [GpSystems.SystmOne] : parseSystmOne
+      [GpSystems.SystmOne] : parseSystmOneReport
    }
    
    

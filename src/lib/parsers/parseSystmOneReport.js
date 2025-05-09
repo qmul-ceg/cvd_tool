@@ -1,4 +1,4 @@
-const parseSystmOne = (files)=>{
+const parseSystmOneReport = (files)=>{
    const filesArray = Array.from(files) //Converted FileList to an array
    const masterReport = {};
    
@@ -15,6 +15,7 @@ const parseSystmOne = (files)=>{
             
             reader.onload = () => {
                const lines = reader.result.split('\n')
+               console.log(lines)
                const headerArray = lines[0].split(',');
                
 
@@ -116,5 +117,5 @@ const parseSystmOne = (files)=>{
    })
 }
 
-export default parseSystmOne
+export default parseSystmOneReport
  

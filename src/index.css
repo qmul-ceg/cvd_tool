@@ -27,7 +27,8 @@
    transition: transform 0.3s;
 }
 
-#emis_default_radio:checked + .emis_custom_radio::after, #systmone_default_radio:checked + .systmone_custom_radio::after{
+#emis_default_radio:checked + .emis_custom_radio::after, 
+#systmone_default_radio:checked + .systmone_custom_radio::after{
    transform:scale(1);
 }
 
