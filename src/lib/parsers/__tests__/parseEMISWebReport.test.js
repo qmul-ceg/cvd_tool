@@ -1,9 +1,10 @@
-import parseEMISWebReport from "../parsers/parseEMISWebReport"
+// import parseEMISWebReport from "../parsers/parseEMISWebReport"
+const parseEMISWebReport = require("../parseEMISWebReport")
 
 describe('parseEMISWebReport', () => {
    it('should return an object with NHS number as the key and patient details as the value', () => {
       //Arrange 
-      const csvString ="Full Name,Age,Gender,NHS number,Date of birth,Mobile number, \n Patient-1,73,Male,NHS-1,01/01/1900,0700-1, "
+      const csvString ="Full Name,Age,Gender,NHS number,Date of birth,Mobile number\nPatient-1,73,Male,NHS-1,01/01/1900,0700-1"
       //Act
       const result = parseEMISWebReport(csvString)
       //Assert 
