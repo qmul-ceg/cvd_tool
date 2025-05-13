@@ -1,22 +1,27 @@
 
+const parseEMISWebReport = (csvString) => {
+   const lines = csvString.split("\n");
+   const headerArray = lines[0].split(",");
 
-const parseEMISWebReport = (file) => {
+   let rowsArray = []
+   let masterReport = {}
+   for (let i = 1; i < lines.length; i++){
+      rowsArray.push(lines[i].split(","));
+   }
 
-      const lines = file.split("\n");
-      const headerArray = lines[0].split(",");
-      const values = lines[1].split(",")
-
-      const masterReport = {}
-      const rowData = {}
+   for(let i = 0; i < rowsArray.length; i++ ){
+      let row = rowsArray[i]
+      let rowObject = {}
       let key;
-      for (let i = 0; i < headerArray.length; i++){
-         rowData[headerArray[i]] = values[i];
+      for (let j = 0; i < headerArray.length; i++){
+         rowObject[headerArray[i]] = row[i]
          if(headerArray[i] === 'NHS number'){
-            key = values[i]
+            key = row[i]
          }
       }
-      masterReport[key] = rowData
-      return masterReport
+      masterReport[key] = rowObject
+   }
+   return masterReport
 }
 
 module.exports = parseEMISWebReport;
@@ -42,4 +47,26 @@ module.exports = parseEMISWebReport;
    //    console.log(error);
    // }
 
-   // reader.readAsText(file);
+   // reader.readAsText(file); // for (let i = 0; i < headerArray.length; i++){
+   //    let patientRow = {};
+   //    patientRow[headerArray[i]] = rows[i][i];
+   //    if(headerArray[i] === 'NHS number') {//Change this to Anonymised identifier
+   //       masterReport[values[i]] = patientRow;
+   //    }
+
+   // }
+      // const lines = file.split("\n");
+      // const headerArray = lines[0].split(",");
+      // const values = lines[1].split(",")
+
+      // const masterReport = {}
+      // const rowData = {}
+      // let key;
+      // for (let i = 0; i < headerArray.length; i++){
+      //    rowData[headerArray[i]] = values[i];
+      //    if(headerArray[i] === 'NHS number'){
+      //       key = values[i]
+      //    }
+      // }
+      // masterReport[key] = rowData
+      // return masterReport

@@ -78,8 +78,8 @@ const parseSystmOneReport = (files)=>{
             for(let i = 1; i < report_array.length; i++){
                let row_array = report_array[i].split(',');
                const report_object = {}    
-               for (let i = 0; i < row_array.length; i++){
-                  report_object[report_header_array[i]] = row_array[i]; 
+               for (let j = 0; i < row_array.length; i++){
+                  report_object[report_header_array[j]] = row_array[j]; 
                }
                report_object_array.push(report_object); 
             } 

@@ -1,5 +1,5 @@
 // import parseEMISWebReport from "../parsers/parseEMISWebReport"
-const parseEMISWebReport = require("../parseEMISWebReport")
+const parseEMISWebReport = require("../lib/parsers/parseEMISWebReport")
 
 describe('parseEMISWebReport', () => {
    it('should return an object with NHS number as the key and patient details as the value', () => {
