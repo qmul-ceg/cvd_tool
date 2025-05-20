@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import GpSystems from "../enums/GpSystems";
 import parseSystmOneReport from "../lib/parsers/parseSystmOneReport";
 // import parseEMISWebReport from "@/lib/parsers/parseEMISWebReport";
-import parseEMISWebFile from "@/lib/utils/parseEMISWebFile"
+import readEMISFile from "@/lib/utils/readEMISFile"
 
 
 //Custom hook that allows us to input a file or folder
@@ -11,7 +11,7 @@ export default function useFileImport(gpSystemSelected){
    const fileInputRef = useRef();
    const [importError, setImportError] = useState('');
    const handlers = {
-      [GpSystems.EMIS_Web] : parseEMISWebFile,
+      [GpSystems.EMIS_Web] : readEMISFile,
       [GpSystems.SystmOne] : parseSystmOneReport
    }
    
@@ -42,17 +42,17 @@ export default function useFileImport(gpSystemSelected){
          return;
       }
       else {
-         handler(files)
+         // handler(files)
 
 
          //Uncomment this - not gving master report becasue there is no promise 
-         // handler(files).then(masterReport => {
-         //    console.log('✅ Master Report:', masterReport);
-         //    // use this data to update update state, display data, etc.
-         //    //
-         //  }).catch(err => {
-         //    console.error('❌ Failed to parse:', err)
-         //  });
+         handler(files).then(masterReport => {
+            console.log('✅ Master Report:', masterReport);
+            // use this data to update update state, display data, etc.
+            //
+          }).catch(err => {
+            console.error('❌ Failed to parse:', err)
+          });
       }
 
    }

@@ -1,4 +1,13 @@
-
+// function doSomething() {
+//    return new Promise((resolve) => {
+//      setTimeout(() => {
+//        // Other things to do before completion of the promise
+//        console.log("Did something");
+//        // The fulfillment value of the promise
+//        resolve("https://example.com/");
+//      }, 200);
+//    });
+//  }
 
 const parseEMISWebFile = (file) =>{
    const fileToRead = file[0]
@@ -11,7 +20,7 @@ const parseEMISWebFile = (file) =>{
 
    reader.onload = (file)=> {
       const result = reader.result
-      console.log(result)
+      console.log(typeof(result))
    }
 
    reader.onerror = ()=>{
@@ -19,8 +28,7 @@ const parseEMISWebFile = (file) =>{
    }
 
    reader.readAsText(fileToRead)
-   // const fileToRead = file[0]
-   // console.log(fileToRead)
+
 }
 
 export default parseEMISWebFile;

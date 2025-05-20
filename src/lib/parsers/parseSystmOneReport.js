@@ -15,7 +15,7 @@ const parseSystmOneReport = (files)=>{
             
             reader.onload = () => {
                const lines = reader.result.split('\n')
-               console.log(lines)
+              
                const headerArray = lines[0].split(',');
                
 
@@ -33,6 +33,7 @@ const parseSystmOneReport = (files)=>{
                   reportObj['key'] = 'report3'
                   reportObj['file'] = file
                }
+               
                resolve(reportObj)
             } 
 
@@ -45,6 +46,7 @@ const parseSystmOneReport = (files)=>{
       });
 
       return Promise.all(sortFilesPromise).then(results => {
+         // console.log(results)
          const reports = results.reduce((acc, report) =>{
             acc[report.key]  = report.file;
             return acc
@@ -57,13 +59,16 @@ const parseSystmOneReport = (files)=>{
    
 
    const parseReportFile = (file) => {
+      
       return new Promise ((resolve, reject) => {
          const reader = new FileReader();
          reader.onload = () => {
             const report_string = reader.result; //Report as a string
+            
             const report_array = report_string.split('\n'); //Return an array of the string splitting each one at the new line
             const report_header_array = report_array[0].split(',');
             
+
             //Changing headers for report 3 
             if(report_header_array[1].trim() === "Antiplatelet"){
                for (let i = 0; i < report_header_array.length; i++){
@@ -73,15 +78,16 @@ const parseSystmOneReport = (files)=>{
                   }
                }
             }
+            
             const report_object_array = [] 
             // Each file will be stored in an array containing a row of object
             for(let i = 1; i < report_array.length; i++){
-               let row_array = report_array[i].split(',');
-               const report_object = {}    
-               for (let j = 0; i < row_array.length; i++){
-                  report_object[report_header_array[j]] = row_array[j]; 
+               let rowArray = report_array[i].split(',');
+               const reportObject = {}    
+               for (let j = 0; j < rowArray.length; j++){
+                  reportObject[report_header_array[j]] = rowArray[j]; 
                }
-               report_object_array.push(report_object); 
+               report_object_array.push(reportObject); 
             } 
             resolve(report_object_array);
          }
@@ -100,7 +106,9 @@ const parseSystmOneReport = (files)=>{
          parseReportFile(reports["report2"]), 
          parseReportFile(reports["report3"])]).then((parsedReports) => {
             for (const report of parsedReports){
+               // console.log(report)
                for (const object of report){
+                  // console.log(object)
                   const nhs_number_check = object['NHS number'];
                   if(nhs_number_check){
                      if(Object.hasOwn(masterReport, nhs_number_check)){
@@ -112,6 +120,7 @@ const parseSystmOneReport = (files)=>{
                   } 
                }
             }
+            
             return masterReport
          })
    })
